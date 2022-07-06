@@ -1,0 +1,10 @@
+
+server:
+  global:
+    scrape_interval: 10s
+  ingress:
+    enabled: true
+    ingressClassName: kong
+    hosts:
+    - prometheus.local
+ 
