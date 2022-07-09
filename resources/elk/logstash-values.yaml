@@ -1,0 +1,53 @@
+persistence:
+  enabled: true
+
+logstashConfig:
+  logstash.yml: |
+    http.host: 0.0.0.0
+    xpack.monitoring.enabled: false
+logstashPipeline:
+  #uptime.conf: |
+  #  input { exec { command => "uptime" interval => 30 } }
+  #  output { elasticsearch { hosts => ["http://elasticsearch-master:9200"] index => "logstash" } }
+  kong.conf: |
+    input {
+      tcp {
+        port => 1514
+        type => syslog
+        codec => json
+      }
+    }
+    filter {
+      json {
+        source => "message"
+        add_tag => ["kong"]
+      }
+
+      mutate {
+        remove_field => [ "message" ]
+      }
+    }
+    output {
+        elasticsearch {
+            hosts => [ "elasticsearch-master:9200" ]
+            index => "logstash-kong"
+        }
+    }
+
+service:
+   annotations: {}
+   type: ClusterIP
+  # loadBalancerIP: ""
+   ports:
+  #   - name: beats
+  #     port: 5044
+  #     protocol: TCP
+  #     targetPort: 5044
+     - name: http
+       port: 9600
+       protocol: TCP
+       targetPort: 9600
+     - name: kong
+       port: 1514
+       protocol: TCP
+       targetPort: 1514

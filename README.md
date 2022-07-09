@@ -37,7 +37,7 @@ kubectl get nodes
 
 ```bash
 # Install metallb
-sh config/install-metallb.sh
+sh resources/metallb/install-metallb.sh
 ```
 
 ## Install kong
@@ -47,7 +47,7 @@ sh config/install-metallb.sh
 sh config/install-kong.sh
 
 # Apply kind specific patches to forward the hostPorts to the ingress controller
-kubectl patch deployment all-in-one-kong -n kong -p '{"spec":{"template":{"spec":{"containers":[{"name":"proxy","ports":[{"containerPort":8000,"hostPort":80,"name":"proxy","protocol":"TCP"},{"containerPort":8443,"hostPort":43,"name":"proxy-ssl","protocol":"TCP"}]}],"nodeSelector":{"ingress-ready":"true"},"tolerations":[{"key":"node-role.kubernetes.io/control-plane","operator":"Equal","effect":"NoSchedule"},{"key":"node-role.kubernetes.io/master","operator":"Equal","effect":"NoSchedule"}]}}}}'
+kubectl patch deployment gateway-kong -n kong -p '{"spec":{"template":{"spec":{"containers":[{"name":"proxy","ports":[{"containerPort":8000,"hostPort":80,"name":"proxy","protocol":"TCP"},{"containerPort":8443,"hostPort":43,"name":"proxy-ssl","protocol":"TCP"}]}],"nodeSelector":{"ingress-ready":"true"},"tolerations":[{"key":"node-role.kubernetes.io/control-plane","operator":"Equal","effect":"NoSchedule"},{"key":"node-role.kubernetes.io/master","operator":"Equal","effect":"NoSchedule"}]}}}}'
 ```
 
 ```bash
@@ -58,13 +58,19 @@ kubectl apply -f apps --recursive
 
 ```bash
 # Install prometheus
-sh config/install-prometheus.sh
+sh resources/prometheus/install-prometheus.sh
 
-# Install prometheus plugin
+# Apply prometheus plugin
 kubectl apply -f kong-plugins/prometheus.yaml
 
 # Install grafana
-sh config/install-grafana.sh
+sh resources/grafana/install-grafana.sh
+
+# Install Elastic Stack
+sh resources/elk/install-elk.sh
+
+# Apply tcp-log plugin
+kubectl apply -f kong-plugins/tcp-log.yaml
 ```
 
 ## Setup `/etc/hosts`
@@ -74,13 +80,15 @@ sh config/install-grafana.sh
 127.0.0.1	httpbin.local
 127.0.0.1	grafana.local
 127.0.0.1	prometheus.local
+127.0.0.1   kibana.local
 ```
 
 ## Services URLs
 
-- [httpbin](https://httpbin.local)
-- [prometheus](https://prometheus.local)
-- [grafana](https://grafana.local)
+- [httpbin](http://httpbin.local)
+- [prometheus](http://prometheus.local)
+- [kibana](http://kibana.local)
+- [grafana](http://grafana.local)
     - Username: `admin`
     - Password: `kong`
 
@@ -94,7 +102,12 @@ sh load-test.sh
 ## Apply rate-limiting plugin
 
 ```bash
-kubectl apply kong-plugins/rate-limiting.yaml
+kubectl apply -f kong-plugins/rate-limiting.yaml
+```
+## Cleanup Kind
+
+```bash
+kind delete cluster --name kong
 ```
 
 ## Author
