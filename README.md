@@ -1,4 +1,4 @@
-# kong k8s
+# Kong API Gateway on K8s - Hybrid Mode
 
 ## Dependencies
 
@@ -40,20 +40,45 @@ kubectl get nodes
 sh resources/metallb/install-metallb.sh
 ```
 
+## Generate Certificates
+Hybrid mode uses TLS to secure the CP/DP node communication channel, and requires certificates for it. You can generate these either using kong hybrid gen_cert on a local Kong installation or using OpenSSL:
+```bash
+openssl req -new -x509 -nodes -newkey ec:<(openssl ecparam -name secp384r1) \
+  -keyout /tmp/cluster.key -out /tmp/cluster.crt \
+  -days 1095 -subj "/CN=kong_clustering"
+```
+
+## Place these certificates in a Secret
+```bash
+kubectl create namespace kong
+kubectl create secret tls kong-cluster-cert --cert=/tmp/cluster.crt --key=/tmp/cluster.key -n kong
+```
 ## Install kong
 
 ```bash
-# Install kong
-sh config/install-kong.sh
+# Install kong control plane
+sh config/install-kong-cp.sh
 
-# Apply kind specific patches to forward the hostPorts to the ingress controller
-kubectl patch deployment gateway-kong -n kong -p '{"spec":{"template":{"spec":{"containers":[{"name":"proxy","ports":[{"containerPort":8000,"hostPort":80,"name":"proxy","protocol":"TCP"},{"containerPort":8443,"hostPort":43,"name":"proxy-ssl","protocol":"TCP"}]}],"nodeSelector":{"ingress-ready":"true"},"tolerations":[{"key":"node-role.kubernetes.io/control-plane","operator":"Equal","effect":"NoSchedule"},{"key":"node-role.kubernetes.io/master","operator":"Equal","effect":"NoSchedule"}]}}}}'
+# Install kong data plane
+sh config/install-kong-dp.sh
 ```
-
+## Deploy all Apps
 ```bash
-# Deploy all Apps
 kubectl apply -f apps --recursive
 ```
+
+## Expose kong admin API and Apps
+```bash
+# Port forward kong admin
+kubectl port-forward -n kong service/cp-kong-admin 8001:8001
+
+# Expose admin API
+sh config/expose-admin-api.sh
+
+# Expose Apps
+sh config/expose-apps.sh
+```
+
 ## Install Monitoring tools
 
 ```bash
@@ -61,7 +86,7 @@ kubectl apply -f apps --recursive
 sh resources/prometheus/install-prometheus.sh
 
 # Apply prometheus plugin
-kubectl apply -f kong-plugins/prometheus.yaml
+sh kong-plugins/prometheus.sh
 
 # Install grafana
 sh resources/grafana/install-grafana.sh
@@ -70,7 +95,10 @@ sh resources/grafana/install-grafana.sh
 sh resources/elk/install-elk.sh
 
 # Apply tcp-log plugin
-kubectl apply -f kong-plugins/tcp-log.yaml
+sh kong-plugins/tcp-log.sh
+
+# Expose grafana and kibana via kong
+sh config/expose-monitoring-toos.sh
 ```
 
 ## Setup `/etc/hosts`
@@ -102,7 +130,7 @@ sh load-test.sh
 ## Apply rate-limiting plugin
 
 ```bash
-kubectl apply -f kong-plugins/rate-limiting.yaml
+sh kong-plugins/rate-limiting.sh
 ```
 ## Cleanup Kind
 

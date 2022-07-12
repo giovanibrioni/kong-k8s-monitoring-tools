@@ -1,0 +1,75 @@
+##
+## Kong docker-compose for fast installation
+##
+
+version: "3.8"
+
+networks:
+ kong-net:
+  name: kong-net
+  driver: bridge
+  ipam:
+    config:
+      - subnet: 172.1.1.0/24
+
+services:
+
+  #######################################
+  # Postgres: The database used by Kong
+  #######################################
+  konga-database:
+    container_name: konga-database
+    image: postgres:11-alpine
+    restart: unless-stopped
+    networks:
+      - kong-net
+    environment:
+      POSTGRES_USER: konga
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "konga"]
+      interval: 30s
+      timeout: 3s
+      retries: 5
+
+
+  #######################################
+  # Konga database prepare
+  #######################################
+  konga-prepare:
+    container_name: konga-prepare
+    image: pantsel/konga:0.14.9
+    command: "-c prepare -a postgres -u postgresql://konga:password@konga-database:5432/konga_db"
+    networks:
+      - kong-net
+    restart: on-failure
+    links:
+      - konga-database
+    depends_on:
+      - konga-database
+
+  #######################################
+  # Konga: Kong GUI
+  #######################################
+  konga:
+    container_name: konga
+    image: pantsel/konga:0.14.9
+    restart: unless-stopped
+    networks:
+      - kong-net
+    environment:
+      DB_ADAPTER: postgres
+      DB_HOST: konga-database
+      DB_USER: konga
+      DB_PASSWORD: password
+      DB_DATABASE: konga_db
+      # any string will OK for token
+      TOKEN_SECRET: iu7YDcPLiZkozQXzZ9kka3Ee1Vid5ZgQ
+      NODE_ENV: development
+    depends_on:
+      - konga-prepare
+    ports:
+      - "1337:1337"
+      

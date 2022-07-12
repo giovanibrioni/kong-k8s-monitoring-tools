@@ -1,0 +1,65 @@
+# Basic configuration for Kong as a hybrid mode data plane node.
+# It depends on the presence of a control plane release, as shown in
+# https://github.com/Kong/charts/blob/main/charts/kong/example-values/minimal-kong-hybrid-control.yaml
+#
+# The "env.cluster_control_plane" value must be changed to your control plane
+# instance's cluster Service hostname. Search "CHANGEME" to find it in this
+# example.
+#
+# Hybrid mode requires a certificate. See https://github.com/Kong/charts/blob/main/charts/kong/README.md#certificates
+# to create one.
+
+image:
+  repository: kong
+  tag: "2.8"
+
+env:
+  prefix: /kong_prefix/
+  database: "off"
+  role: data_plane
+  cluster_control_plane: cp-kong-cluster.kong.svc.cluster.local:8005
+  lua_ssl_trusted_certificate: /etc/secrets/kong-cluster-cert/tls.crt
+  cluster_cert: /etc/secrets/kong-cluster-cert/tls.crt
+  cluster_cert_key: /etc/secrets/kong-cluster-cert/tls.key
+
+admin:
+  enabled: false
+
+secretVolumes:
+- kong-cluster-cert
+
+ingressController:
+  enabled: false
+
+podAnnotations:
+  prometheus.io/scrape: "true" # Ask Prometheus to scrape the
+  prometheus.io/port: "8100"   # Kong pods for metrics
+admin:
+  tls:
+    parameters: []
+
+# Specify Kong proxy service configuration
+proxy:
+  # Enable creating a Kubernetes service for the proxy
+  enabled: true
+  type: LoadBalancer
+  annotations: {}
+  labels:
+    enable-metrics: "true"
+
+  http:
+    # Enable plaintext HTTP listen for the proxy
+    enabled: true
+    hostPort: 80
+    containerPort: 8000
+    parameters: []
+
+  tls:
+    # Enable HTTPS listen for the proxy
+    enabled: true
+    hostPort: 443
+    containerPort: 8443
+    parameters:
+    - http2
+
+  stream: []
