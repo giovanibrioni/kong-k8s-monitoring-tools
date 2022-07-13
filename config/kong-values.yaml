@@ -4,3 +4,27 @@ podAnnotations:
 admin:
   tls:
     parameters: []
+
+# Specify Kong proxy service configuration
+proxy:
+  # Enable creating a Kubernetes service for the proxy
+  enabled: true
+  type: LoadBalancer
+  annotations: {}
+  labels:
+    enable-metrics: "true"
+
+  http:
+    # Enable plaintext HTTP listen for the proxy
+    enabled: true
+    hostPort: 80
+    containerPort: 8000
+    parameters: []
+
+  tls:
+    # Enable HTTPS listen for the proxy
+    enabled: true
+    hostPort: 443
+    containerPort: 8443
+    parameters:
+    - http2

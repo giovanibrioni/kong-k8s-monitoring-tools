@@ -1,4 +1,4 @@
-# kong k8s
+# Kong API Gateway on K8s - Ingress Mode
 
 ## Dependencies
 
@@ -45,9 +45,6 @@ sh resources/metallb/install-metallb.sh
 ```bash
 # Install kong
 sh config/install-kong.sh
-
-# Apply kind specific patches to forward the hostPorts to the ingress controller
-kubectl patch deployment gateway-kong -n kong -p '{"spec":{"template":{"spec":{"containers":[{"name":"proxy","ports":[{"containerPort":8000,"hostPort":80,"name":"proxy","protocol":"TCP"},{"containerPort":8443,"hostPort":43,"name":"proxy-ssl","protocol":"TCP"}]}],"nodeSelector":{"ingress-ready":"true"},"tolerations":[{"key":"node-role.kubernetes.io/control-plane","operator":"Equal","effect":"NoSchedule"},{"key":"node-role.kubernetes.io/master","operator":"Equal","effect":"NoSchedule"}]}}}}'
 ```
 
 ```bash
