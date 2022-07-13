@@ -5,7 +5,7 @@
 # kubectl port-forward deploy/your-deployment-kong 8001:8001
 
 image:
-  repository: kong
+  repository: kong/kong-gateway
   tag: "2.8"
 
 env:
@@ -14,6 +14,7 @@ env:
   role: control_plane
   cluster_cert: /etc/secrets/kong-cluster-cert/tls.crt
   cluster_cert_key: /etc/secrets/kong-cluster-cert/tls.key
+  cluster_telemetry_listen: 0.0.0.0:8006
 
 admin:
   enabled: true
@@ -43,3 +44,25 @@ postgresql:
 
 ingressController:
   enabled: false
+
+enterprise:
+  enabled: true
+  vitals:
+    enabled: false
+  rbac:
+    admin_api_auth: basic-auth
+    enabled: true
+    session_conf_secret: kong-session-config
+
+manager:
+  # Enable creating a Kubernetes service for Kong Manager
+  enabled: true
+
+portal:
+  enabled: false
+
+portalapi:
+  enabled: false
+
+clustertelemetry:
+  enabled: true

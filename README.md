@@ -1,4 +1,4 @@
-# Kong API Gateway on K8s - Hybrid Mode
+# Kong API Gateway on K8s - Enterprise Free - Hybrid Mode
 
 ## Dependencies
 
@@ -53,6 +53,10 @@ openssl req -new -x509 -nodes -newkey ec:<(openssl ecparam -name secp384r1) \
 kubectl create namespace kong
 kubectl create secret tls kong-cluster-cert --cert=/tmp/cluster.crt --key=/tmp/cluster.key -n kong
 ```
+## Configure RBAC to enable Kong Manager
+```bash
+sh config/rbac.sh
+```
 ## Install kong
 
 ```bash
@@ -74,6 +78,9 @@ kubectl port-forward -n kong service/cp-kong-admin 8001:8001
 
 # Expose admin API
 sh config/expose-admin-api.sh
+
+# Expose Kong Manager GUI
+sh config/expose-manager.sh
 
 # Expose Apps
 sh config/expose-apps.sh
@@ -105,15 +112,17 @@ sh config/expose-monitoring-toos.sh
 
 > /etc/hosts
 ```bash
-127.0.0.1	httpbin.local
-127.0.0.1	grafana.local
-127.0.0.1	prometheus.local
+127.0.0.1   httpbin.local
+127.0.0.1   grafana.local
+127.0.0.1   prometheus.local
 127.0.0.1   kibana.local
+127.0.0.1   kong-manager.local
 ```
 
 ## Services URLs
 
 - [httpbin](http://httpbin.local)
+- [kong-manager GUI](http://kong-manager.local)
 - [prometheus](http://prometheus.local)
 - [kibana](http://kibana.local)
 - [grafana](http://grafana.local)

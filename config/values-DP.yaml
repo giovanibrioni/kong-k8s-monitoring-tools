@@ -10,7 +10,7 @@
 # to create one.
 
 image:
-  repository: kong
+  repository: kong/kong-gateway
   tag: "2.8"
 
 env:
@@ -62,4 +62,17 @@ proxy:
     parameters:
     - http2
 
-  stream: []
+enterprise:
+  enabled: true
+  # See instructions regarding enterprise licenses at https://github.com/Kong/charts/blob/master/charts/kong/README.md#kong-enterprise-license
+  vitals:
+    enabled: false
+
+manager:
+  enabled: false
+
+portal:
+  enabled: false
+
+portalapi:
+  enabled: false
