@@ -1,5 +1,9 @@
 # Kong API Gateway on K8s - Ingress Mode
 
+This is a how to guide to configure Kong API Gateway running on k8s as Ingress controller with monitoring tools (Prometheus, Grafana and ELk)  
+ - To configure Kong OSS running in hybrid mode switch to branch: kong-hybrid-mode
+ - To configure Kong Enterprise Free running in hybrid mode switch to branch: enterprise-free-hybrid
+
 ## Dependencies
 
 - [Docker](https://docs.docker.com/engine/install/)
