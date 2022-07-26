@@ -1,0 +1,18 @@
+apiVersion: configuration.konghq.com/v1
+kind: KongClusterPlugin
+metadata:
+  name: oidc
+  annotations:
+    kubernetes.io/ingress.class: "kong"
+  labels:
+    global: "false"
+disabled: false # optionally disable the plugin in Kong
+plugin: "oidc"
+config: # configuration for the plugin
+  client_id: "kong"
+  client_secret: "your-client-secret"  # Client Secret Copied
+  bearer_only: "yes"
+  realm: "kong"
+  introspection_endpoint: "http://keycloak.local/realms/master/protocol/openid-connect/token/introspect"
+  discovery: "http://keycloack.local/auth/realms/master/.well-known/openid-configuration"  # OpenID Endpoint Configuration Copied
+  scope: "openid"

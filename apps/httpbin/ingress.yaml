@@ -5,7 +5,7 @@ metadata:
   labels:
     app: httpbin
   annotations:
-    konghq.com/plugins: rate-limiting
+    konghq.com/plugins: oidc
     # konghq.com/host-aliases: "example.com,example.net"
     # konghq.com/methods: "GET,POST"
     # konghq.com/https-redirect-status-code: "301"
