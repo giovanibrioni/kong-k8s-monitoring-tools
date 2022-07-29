@@ -1,0 +1,10 @@
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: http-log-multi-body
+config:
+  http_endpoint: "http://audit-server-logstash.audit.svc.cluster.local:8080"
+  body_content_types: 
+    - "application/json"
+    - "text/plain"
+plugin: http-log-multi-body

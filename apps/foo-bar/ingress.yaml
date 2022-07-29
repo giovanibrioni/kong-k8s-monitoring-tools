@@ -5,6 +5,8 @@ metadata:
   name: foo-bar-ingress
   labels:
     app: foo-bar
+  annotations:
+    #konghq.com/plugins: http-log-multi-body
 spec:
   ingressClassName: kong
   rules:

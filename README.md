@@ -1,6 +1,6 @@
-# Kong API Gateway on K8s - Ingress Mode / Keycloak: securing API through OIDC
+# Kong API Gateway on K8s - Ingress Mode / Keycloak: securing API through OIDC and Audit
 
-This is a how to guide to configure Kong API Gateway running on k8s as Ingress controller with monitoring tools (Prometheus, Grafana and ELk) and securing API through OIDC
+This is a how to guide to configure Kong API Gateway running on k8s as Ingress controller with monitoring tools (Prometheus, Grafana and ELk), securing API through OIDC and log audit with body
  - To configure Kong OSS running in hybrid mode switch to branch: kong-hybrid-mode
  - To configure Kong Enterprise Free running in hybrid mode switch to branch: enterprise-free-hybrid
 
@@ -61,14 +61,6 @@ sh config/install-kong.sh
 # Deploy all Apps
 kubectl apply -f apps --recursive
 ```
-
-## Install Keycloak
-
-```bash
-# Install keycloak
-sh resources/keycloak/install-keycloak.sh
-```
-
 ## Install Monitoring tools
 
 ```bash
@@ -108,7 +100,13 @@ kubectl apply -f kong-plugins/tcp-log.yaml
     - Username: `admin`
     - Password: `kong`
 
-## Configuration of realm and clients in Keycloak
+## Install Keycloak
+
+```bash
+# Install keycloak
+sh resources/keycloak/install-keycloak.sh
+```
+### Configuration of realm and clients in Keycloak
 
 - Login on [keycloak](http://keycloak.local)
     - Username: `admin`
@@ -166,7 +164,7 @@ Confirmation" with the user's password.
 
 ![Change Password](images/keycloak-user-change-password.png)
 
-## Configure OIDC Kong Plugins
+### Configure OIDC Kong Plugins
 
 ```bash
 # Override client_secret on file kong-plugins/oidc.yaml
@@ -190,7 +188,7 @@ config: # configuration for the plugin
   scope: "openid"
 ```
 
-## Apply oidc plugin to httpbin-service
+### Apply oidc plugin to httpbin-service
 ```bash
 # Configure plugin
 kubectl apply -f kong-plugins/oidc.yaml
@@ -198,7 +196,7 @@ kubectl apply -f kong-plugins/oidc.yaml
 # Apply plugin to httpbin-service
 kubectl apply -f apps/httpbin/ingress.yaml
 ```
-## Test
+### Test
 ![Request Flow](images/request-flow.png)
 
 ```bash
@@ -223,6 +221,36 @@ TKN=$(curl -s -X POST \
 curl -I http://localhost:80 \
 -H "Host:httpbin.local" \
 -H "Authorization: Bearer $TKN"
+```
+## Configure Autid Log
+
+```bash
+# Deploy Audit Server to store request and response body on ElasticSearch (Dependency: Elk resources)
+sh resources/elk/install-audit-server.sh
+
+# Apply kong-plugin to send data to Audit Server
+kubectl apply -f kong-plugins/http-log-multi-body.yaml
+```
+
+```bash
+# uncomment the annotation on file apps/foo-bar/ingress.yaml
+  annotations:
+    #konghq.com/plugins: http-log-multi-body
+```
+
+```bash
+# Apply configurations to ingress
+kubectl apply -f apps/foo-bar/ingress.yaml
+```
+
+```bash
+# This request should send data with body to ElasticSearch
+curl -X POST http://localhost/foo -d "hello=world"
+```
+
+```bash
+# This don't send audit log with body to ElasticSearch
+curl http://localhost/foo
 ```
 
 ## Cleanup Kind
