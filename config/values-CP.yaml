@@ -5,8 +5,8 @@
 # kubectl port-forward deploy/your-deployment-kong 8001:8001
 
 image:
-  repository: kong
-  tag: "2.8"
+  repository: giovanibrioni/kong-oidc
+  tag: "latest"
 
 env:
   prefix: /kong_prefix/
@@ -14,19 +14,20 @@ env:
   role: control_plane
   cluster_cert: /etc/secrets/kong-cluster-cert/tls.crt
   cluster_cert_key: /etc/secrets/kong-cluster-cert/tls.key
+  plugins: bundled, oidc, http-log-multi-body
 
 admin:
   enabled: true
   http:
     enabled: true
-    servicePort: 8001
+    hostPort: 8001
     containerPort: 8001
 
 cluster:
   enabled: true
   tls:
     enabled: true
-    servicePort: 8005
+    hostPort: 8005
     containerPort: 8005
 
 proxy:

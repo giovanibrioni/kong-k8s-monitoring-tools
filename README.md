@@ -121,6 +121,14 @@ sh config/expose-monitoring-toos.sh
     - Password: `kong`
 
 
+## OpenAPI Specification to Kong
+
+```bash
+# change --kong-addr on file config/openapi2kong/convert-and-deploy.sh to your kong admin api url (its must be acessed from docker container)
+
+# Convert OpenAPI Specification to Kong declarative config and deploy
+sh config/openapi2kong/convert-and-deploy.sh
+```
 ## Generate load
 
 ```bash

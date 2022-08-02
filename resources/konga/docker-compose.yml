@@ -5,8 +5,8 @@
 version: "3.8"
 
 networks:
- kong-net:
-  name: kong-net
+ konga-net:
+  name: konga-net
   driver: bridge
   ipam:
     config:
@@ -22,7 +22,7 @@ services:
     image: postgres:11-alpine
     restart: unless-stopped
     networks:
-      - kong-net
+      - konga-net
     environment:
       POSTGRES_USER: konga
       POSTGRES_PASSWORD: password
@@ -43,7 +43,7 @@ services:
     image: pantsel/konga:0.14.9
     command: "-c prepare -a postgres -u postgresql://konga:password@konga-database:5432/konga_db"
     networks:
-      - kong-net
+      - konga-net
     restart: on-failure
     links:
       - konga-database
@@ -58,7 +58,7 @@ services:
     image: pantsel/konga:0.14.9
     restart: unless-stopped
     networks:
-      - kong-net
+      - konga-net
     environment:
       DB_ADAPTER: postgres
       DB_HOST: konga-database
@@ -66,7 +66,7 @@ services:
       DB_PASSWORD: password
       DB_DATABASE: konga_db
       # any string will OK for token
-      TOKEN_SECRET: iu7YDcPLiZkozQXzZ9kka3Ee1Vid5ZgQ
+      TOKEN_SECRET: konga-token
       NODE_ENV: development
     depends_on:
       - konga-prepare

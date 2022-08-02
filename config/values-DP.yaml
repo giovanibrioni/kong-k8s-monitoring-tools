@@ -10,8 +10,8 @@
 # to create one.
 
 image:
-  repository: kong
-  tag: "2.8"
+  repository: giovanibrioni/kong-oidc
+  tag: "latest"
 
 env:
   prefix: /kong_prefix/
@@ -21,6 +21,7 @@ env:
   lua_ssl_trusted_certificate: /etc/secrets/kong-cluster-cert/tls.crt
   cluster_cert: /etc/secrets/kong-cluster-cert/tls.crt
   cluster_cert_key: /etc/secrets/kong-cluster-cert/tls.key
+  plugins: bundled, oidc, http-log-multi-body
 
 admin:
   enabled: false
@@ -34,9 +35,6 @@ ingressController:
 podAnnotations:
   prometheus.io/scrape: "true" # Ask Prometheus to scrape the
   prometheus.io/port: "8100"   # Kong pods for metrics
-admin:
-  tls:
-    parameters: []
 
 # Specify Kong proxy service configuration
 proxy:
