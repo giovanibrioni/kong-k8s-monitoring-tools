@@ -108,7 +108,8 @@ sh config/expose-monitoring-toos.sh
 127.0.0.1	httpbin.local
 127.0.0.1	grafana.local
 127.0.0.1	prometheus.local
-127.0.0.1   kibana.local
+127.0.0.1 kibana.local
+127.0.0.1 keycload.local
 ```
 
 ## Services URLs
@@ -129,6 +130,24 @@ sh config/expose-monitoring-toos.sh
 # Convert OpenAPI Specification to Kong declarative config and deploy
 sh config/openapi2kong/convert-and-deploy.sh
 ```
+
+## Protect API with keycloak
+
+```bash
+# Configure kong route to expose keycloak.local
+sh config/expose-keycloak.sh
+```
+### Follow this steps to configure keycloak
+https://github.com/giovanibrioni/kong-k8s-monitoring-tools/tree/kong-ingress-keycloak#install-keycloak
+
+### Apply oidc plugin on httpbin-service
+```bash
+# Configure kong route to expose keycloak.local
+sh config/expose-keycloak.sh
+```
+
+### Follow this steps to test security
+https://github.com/giovanibrioni/kong-k8s-monitoring-tools/tree/kong-ingress-keycloak#test
 ## Generate load
 
 ```bash
