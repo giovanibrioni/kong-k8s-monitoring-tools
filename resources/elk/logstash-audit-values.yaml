@@ -1,0 +1,45 @@
+persistence:
+  enabled: true
+
+logstashConfig:
+  logstash.yml: |
+    http.host: 0.0.0.0
+    xpack.monitoring.enabled: false
+logstashPipeline:
+  audit.conf: |
+    input { http { } }
+    filter {
+      json {
+        source => "message"
+        add_tag => ["kong"]
+      }
+      mutate {
+        remove_field => [ "message" ]
+      }
+    }
+    output {
+        if (([request][body] or [response][body]) and [request][method] in ["POST","PUT","PATCH","DELETE"]) {
+          elasticsearch {
+              hosts => [ "elasticsearch-master.elk.svc.cluster.local:9200" ]
+              index => "audit-kong"
+          }
+        }
+    }
+
+service:
+   annotations: {}
+   type: ClusterIP
+  # loadBalancerIP: ""
+   ports:
+  #   - name: beats
+  #     port: 5044
+  #     protocol: TCP
+  #     targetPort: 5044
+     - name: http
+       port: 8080
+       protocol: TCP
+       targetPort: 8080
+     - name: kong
+       port: 1514
+       protocol: TCP
+       targetPort: 1514

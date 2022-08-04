@@ -9,4 +9,6 @@ metadata:
 config:
   host: logstash-logstash.elk.svc.cluster.local
   port: 1514
+  custom_fields_by_lua:
+    request.batata: "return kong.request.get_header('h1')"
 plugin: tcp-log

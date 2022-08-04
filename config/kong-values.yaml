@@ -1,9 +1,22 @@
 podAnnotations:
   prometheus.io/scrape: "true" # Ask Prometheus to scrape the
   prometheus.io/port: "8100"   # Kong pods for metrics
+
 admin:
   tls:
     parameters: []
+
+env: 
+  plugins: bundled, oidc, http-log-multi-body
+
+image:
+  repository: giovanibrioni/kong-oidc
+  tag: "latest"
+  # Kong Enterprise
+  # repository: kong/kong-gateway
+  # tag: "2.8"
+
+  pullPolicy: IfNotPresent
 
 # Specify Kong proxy service configuration
 proxy:
