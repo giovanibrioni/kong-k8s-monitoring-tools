@@ -1,0 +1,265 @@
+_format_version: "1.1"
+services:
+  - name: httpbin
+    protocol: http
+    host: httpbin-service.default.svc.cluster.local
+    port: 80
+    path: /
+    plugins: []
+    routes:
+      - tags:
+          - OAS3_import
+          - OAS3file_httpbin.yaml
+        name: httpbin-get-get
+        methods:
+          - GET
+        paths:
+          - /get$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_httpbin.yaml
+        name: httpbin-delete-delete
+        methods:
+          - DELETE
+        paths:
+          - /delete$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_httpbin.yaml
+        name: httpbin-post-post
+        methods:
+          - POST
+        paths:
+          - /post$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_httpbin.yaml
+        name: httpbin-ip-get
+        methods:
+          - GET
+        paths:
+          - /ip$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_httpbin.yaml
+        name: httpbin-user-agent-get
+        methods:
+          - GET
+        paths:
+          - /user-agent$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_httpbin.yaml
+        name: httpbin-headers-get
+        methods:
+          - GET
+        paths:
+          - /headers$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_httpbin.yaml
+        name: httpbin-anything-get
+        methods:
+          - GET
+        paths:
+          - /anything$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_httpbin.yaml
+        name: httpbin-anything-post
+        methods:
+          - POST
+        paths:
+          - /anything$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_httpbin.yaml
+        name: httpbin-anything-put
+        methods:
+          - PUT
+        paths:
+          - /anything$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_httpbin.yaml
+        name: httpbin-anything-patch
+        methods:
+          - PATCH
+        paths:
+          - /anything$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_httpbin.yaml
+        name: httpbin-anything-delete
+        methods:
+          - DELETE
+        paths:
+          - /anything$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_httpbin.yaml
+        name: httpbin-delay-n-get
+        methods:
+          - GET
+        paths:
+          - /delay/(?<n>[^\/]+)$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_httpbin.yaml
+        name: httpbin-basic-auth-user-password-get
+        methods:
+          - GET
+        paths:
+          - /basic-auth/(?<user>[^\/]+)/(?<password>[^\/]+)$
+        strip_path: false
+        plugins:
+          - name: basic-auth
+            tags:
+              - OAS3_import
+              - OAS3file_httpbin.yaml
+      - tags:
+          - OAS3_import
+          - OAS3file_httpbin.yaml
+        name: httpbin-hidden-basic-auth-user-password-get
+        methods:
+          - GET
+        paths:
+          - /hidden-basic-auth/(?<user>[^\/]+)/(?<password>[^\/]+)$
+        strip_path: false
+        plugins:
+          - name: basic-auth
+            tags:
+              - OAS3_import
+              - OAS3file_httpbin.yaml
+      - tags:
+          - OAS3_import
+          - OAS3file_httpbin.yaml
+        name: httpbin-status-statusCode-get
+        methods:
+          - GET
+        paths:
+          - /status/(?<statusCode>[^\/]+)$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_httpbin.yaml
+        name: httpbin-status-statusCode-post
+        methods:
+          - POST
+        paths:
+          - /status/(?<statusCode>[^\/]+)$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_httpbin.yaml
+        name: httpbin-status-statusCode-patch
+        methods:
+          - PATCH
+        paths:
+          - /status/(?<statusCode>[^\/]+)$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_httpbin.yaml
+        name: httpbin-status-statusCode-put
+        methods:
+          - PUT
+        paths:
+          - /status/(?<statusCode>[^\/]+)$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_httpbin.yaml
+        name: httpbin-status-statusCode-delete
+        methods:
+          - DELETE
+        paths:
+          - /status/(?<statusCode>[^\/]+)$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_httpbin.yaml
+        name: httpbin-xml-get
+        methods:
+          - GET
+        paths:
+          - /xml$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_httpbin.yaml
+        name: httpbin-html-get
+        methods:
+          - GET
+        paths:
+          - /html$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_httpbin.yaml
+        name: httpbin-image-format-get
+        methods:
+          - GET
+        paths:
+          - /image/(?<format>[^\/]+)$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_httpbin.yaml
+        name: httpbin-image-get
+        methods:
+          - GET
+        paths:
+          - /image$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_httpbin.yaml
+        name: httpbin-cache-get
+        methods:
+          - GET
+        paths:
+          - /cache$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_httpbin.yaml
+        name: httpbin-cookies-get
+        methods:
+          - GET
+        paths:
+          - /cookies$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_httpbin.yaml
+        name: httpbin-cookies-set-get
+        methods:
+          - GET
+        paths:
+          - /cookies/set$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_httpbin.yaml
+        name: httpbin-cookies-delete-get
+        methods:
+          - GET
+        paths:
+          - /cookies/delete$
+        strip_path: false
+    tags:
+      - OAS3_import
+      - OAS3file_httpbin.yaml

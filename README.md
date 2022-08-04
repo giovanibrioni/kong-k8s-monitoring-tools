@@ -142,8 +142,7 @@ https://github.com/giovanibrioni/kong-k8s-monitoring-tools#install-keycloak
 
 ### Apply oidc plugin on httpbin-service
 ```bash
-# Configure kong route to expose keycloak.local
-sh config/expose-keycloak.sh
+sh kong-plugins/oidc.sh 
 ```
 
 ### Follow this steps to test
@@ -161,12 +160,12 @@ sh kong-plugins/http-log-multi-body.sh
 
 ```bash
 # This request should send data with body to ElasticSearch
-curl -X POST http://localhost/foo -d "hello=world"
+curl -H "Host:httpbin.local" -X POST http://localhost/anything -d "hello=world"
 ```
 
 ```bash
 # This don't send audit log with body to ElasticSearch
-curl http://localhost/foo
+curl -H "Host:httpbin.local" http://localhost/anything
 ```
 ## Generate load
 
@@ -174,7 +173,7 @@ curl http://localhost/foo
 sh load-test.sh
 ```
 
-## Apply rate-limiting plugin
+## Apply rate-limiting plugin to stop load
 
 ```bash
 sh kong-plugins/rate-limiting.sh
