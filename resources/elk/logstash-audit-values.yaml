@@ -15,13 +15,14 @@ logstashPipeline:
       }
       mutate {
         remove_field => [ "message" ]
+        lowercase => [ "[headers][request_method]" ]
       }
     }
     output {
         if (([request][body] or [response][body]) and [request][method] in ["POST","PUT","PATCH","DELETE"]) {
           elasticsearch {
               hosts => [ "elasticsearch-master.elk.svc.cluster.local:9200" ]
-              index => "audit-kong"
+              index => "audit-kong-%{[route][name]}-%{[headers][request_method]}"
           }
         }
     }
