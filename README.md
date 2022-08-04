@@ -138,7 +138,7 @@ sh config/openapi2kong/convert-and-deploy.sh
 sh config/expose-keycloak.sh
 ```
 ### Follow this steps to configure keycloak
-https://github.com/giovanibrioni/kong-k8s-monitoring-tools/tree/kong-ingress-keycloak#install-keycloak
+https://github.com/giovanibrioni/kong-k8s-monitoring-tools#install-keycloak
 
 ### Apply oidc plugin on httpbin-service
 ```bash
@@ -147,7 +147,7 @@ sh config/expose-keycloak.sh
 ```
 
 ### Follow this steps to test
-https://github.com/giovanibrioni/kong-k8s-monitoring-tools/tree/kong-ingress-keycloak#test
+https://github.com/giovanibrioni/kong-k8s-monitoring-tools#test
 
 ## Configure Autid Log
 
