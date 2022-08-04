@@ -105,11 +105,11 @@ sh config/expose-monitoring-toos.sh
 
 > /etc/hosts
 ```bash
-127.0.0.1	httpbin.local
-127.0.0.1	grafana.local
-127.0.0.1	prometheus.local
-127.0.0.1 kibana.local
-127.0.0.1 keycload.local
+127.0.0.1   httpbin.local
+127.0.0.1   grafana.local
+127.0.0.1   prometheus.local
+127.0.0.1   kibana.local
+127.0.0.1   keycloak.local
 ```
 
 ## Services URLs
@@ -146,8 +146,28 @@ https://github.com/giovanibrioni/kong-k8s-monitoring-tools/tree/kong-ingress-key
 sh config/expose-keycloak.sh
 ```
 
-### Follow this steps to test security
+### Follow this steps to test
 https://github.com/giovanibrioni/kong-k8s-monitoring-tools/tree/kong-ingress-keycloak#test
+
+## Configure Autid Log
+
+```bash
+# Deploy Audit Server to store request and response body on ElasticSearch (Dependency: Elk resources)
+sh resources/elk/install-audit-server.sh
+
+# Apply kong-plugin to send data to Audit Server
+sh kong-plugins/http-log-multi-body.sh 
+```
+
+```bash
+# This request should send data with body to ElasticSearch
+curl -X POST http://localhost/foo -d "hello=world"
+```
+
+```bash
+# This don't send audit log with body to ElasticSearch
+curl http://localhost/foo
+```
 ## Generate load
 
 ```bash
