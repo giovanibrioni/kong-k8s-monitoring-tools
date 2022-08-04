@@ -5,8 +5,7 @@ metadata:
   labels:
     app: httpbin
   annotations:
-    #konghq.com/plugins: oidc
-    #konghq.com/plugins: oidc,http-log-multi-body
+    konghq.com/plugins: http-log-multi-body
 spec:
   ingressClassName: kong
   rules:

@@ -194,7 +194,7 @@ config: # configuration for the plugin
 kubectl apply -f kong-plugins/oidc.yaml
 
 # Apply plugin to httpbin-service
-kubectl apply -f apps/httpbin/ingress.yaml
+kubectl apply -f apps/httpbin/ingress-oidc.yaml
 ```
 ### Test
 ![Request Flow](images/request-flow.png)
@@ -233,24 +233,34 @@ kubectl apply -f kong-plugins/http-log-multi-body.yaml
 ```
 
 ```bash
-# uncomment the annotation on file apps/foo-bar/ingress.yaml
-  annotations:
-    #konghq.com/plugins: http-log-multi-body
-```
-
-```bash
 # Apply configurations to ingress
-kubectl apply -f apps/foo-bar/ingress.yaml
+kubectl apply -f apps/httpbin/ingress-with-audit.yaml
 ```
 
 ```bash
 # This request should send data with body to ElasticSearch
-curl -X POST http://localhost/foo -d "hello=world"
+curl -H "Host:httpbin.local" -X POST http://localhost/anything -d "hello=world"
 ```
 
 ```bash
 # This don't send audit log with body to ElasticSearch
-curl http://localhost/foo
+curl -H "Host:httpbin.local" http://localhost/anything
+```
+## Generate load
+
+```bash
+sh load-test.sh
+```
+
+## Apply rate-limiting plugin to stop load
+
+```bash
+# apply rate-limiting plugin
+kubectl apply -f kong-plugins/rate-limiting.yaml
+```
+```bash
+# apply rate-limiting on httbbin route
+kubectl apply -f apps/httpbin/ingress-rate-limiting.yaml
 ```
 
 ## Cleanup Kind

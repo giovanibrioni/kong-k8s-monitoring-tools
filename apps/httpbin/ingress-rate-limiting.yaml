@@ -5,8 +5,7 @@ metadata:
   labels:
     app: httpbin
   annotations:
-    #konghq.com/plugins: oidc
-    #konghq.com/plugins: oidc,http-log-multi-body
+    konghq.com/plugins: rate-limiting
 spec:
   ingressClassName: kong
   rules:
