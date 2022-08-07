@@ -136,7 +136,7 @@ sh config/expose-monitoring-toos.sh
 sh load-test.sh
 ```
 
-## Apply rate-limiting plugin
+## Apply rate-limiting plugin to stop load
 
 ```bash
 sh kong-plugins/rate-limiting.sh

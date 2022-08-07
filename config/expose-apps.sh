@@ -1,9 +1,9 @@
 curl -i -X POST \
   --url http://localhost/admin-api/services/ \
-  --data 'name=kong-manager-service' \
-  --data 'url=http://cp-kong-manager.kong.svc.cluster.local:8002/'
+  --data 'name=httpbin-service' \
+  --data 'url=http://httpbin-service.default.svc.cluster.local/'
 
 curl -i -X POST \
-  --url http://localhost/admin-api/services/kong-manager-service/routes/ \
-  --data 'hosts[]=kong-manager.local' \
-  --data name=kong-manager-route
+  --url http://localhost/admin-api/services/httpbin-service/routes/ \
+  --data 'hosts[]=httpbin.local' \
+  --data name=httpbin-route
