@@ -21,7 +21,7 @@ env:
   lua_ssl_trusted_certificate: /etc/secrets/kong-cluster-cert/tls.crt
   cluster_cert: /etc/secrets/kong-cluster-cert/tls.crt
   cluster_cert_key: /etc/secrets/kong-cluster-cert/tls.key
-  plugins: bundled, oidc, http-log-multi-body
+  plugins: bundled, oidc, http-log-multi-body, jwt-keycloak
 
 admin:
   enabled: false
