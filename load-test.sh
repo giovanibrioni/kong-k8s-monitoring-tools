@@ -1,10 +1,6 @@
 while true;
 
 do
- curl http://127.0.0.1/bar
- curl http://127.0.0.1/foo
+ curl -I http://127.0.0.1/anything -H "Host:httpbin.local"
  sleep 0.01
 done
-
-
-# curl -I "http://httpbin.local/headers"

@@ -121,6 +121,11 @@ name (Master) on the upper left corner:
 
 ![Keycloak New Realm](images/keycloak-new-realm.png)
 
+Fullfill this fields:
+
+- _Name_: kong
+- _Frontend URL_: http://keycloak-kong.keycloak.svc.cluster.local:8080
+
  - Create a new Kong Client in the realm , eg kong
 
 ![Keycloak create client](images/keycloak-create-client-1.png)
