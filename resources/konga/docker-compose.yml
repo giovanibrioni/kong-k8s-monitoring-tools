@@ -19,7 +19,7 @@ services:
   #######################################
   konga-database:
     container_name: konga-database
-    image: postgres:11-alpine
+    image: postgres:13.7-alpine
     restart: unless-stopped
     networks:
       - konga-net
@@ -40,8 +40,10 @@ services:
   #######################################
   konga-prepare:
     container_name: konga-prepare
-    image: pantsel/konga:0.14.9
+    image: giovanibrioni/konga:postgres12-or-newer
     command: "-c prepare -a postgres -u postgresql://konga:password@konga-database:5432/konga_db"
+    environment:
+      DB_IS_PG12_OR_NEWER: "true"
     networks:
       - konga-net
     restart: on-failure
@@ -55,7 +57,7 @@ services:
   #######################################
   konga:
     container_name: konga
-    image: pantsel/konga:0.14.9
+    image: giovanibrioni/konga:postgres12-or-newer
     restart: unless-stopped
     networks:
       - konga-net
@@ -68,6 +70,7 @@ services:
       # any string will OK for token
       TOKEN_SECRET: konga-token
       NODE_ENV: development
+      DB_IS_PG12_OR_NEWER: "true"
     depends_on:
       - konga-prepare
     ports:
