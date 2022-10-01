@@ -11,7 +11,7 @@
 
 image:
   repository: giovanibrioni/kong-oidc
-  tag: "latest"
+  tag: "arm"
 
 env:
   prefix: /kong_prefix/
@@ -48,14 +48,14 @@ proxy:
   http:
     # Enable plaintext HTTP listen for the proxy
     enabled: true
-    hostPort: 80
+    servicePort: 80
     containerPort: 8000
     parameters: []
 
   tls:
     # Enable HTTPS listen for the proxy
     enabled: true
-    hostPort: 443
+    servicePort: 443
     containerPort: 8443
     parameters:
     - http2

@@ -6,7 +6,7 @@
 
 image:
   repository: giovanibrioni/kong-oidc
-  tag: "latest"
+  tag: "arm"
 
 env:
   prefix: /kong_prefix/
@@ -41,6 +41,9 @@ postgresql:
   auth:
     username: kong
     database: kong
+  image:
+    repository: arm64v8/postgres
+    tag: 13
 
 ingressController:
   enabled: false
