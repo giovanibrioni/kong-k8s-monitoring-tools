@@ -3,4 +3,4 @@ configInline:
    - name: default
      protocol: layer2
      addresses:
-     - 127.0.0.1-127.0.0.50
+     - 129.146.102.80

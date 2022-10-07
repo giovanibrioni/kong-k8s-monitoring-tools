@@ -1,0 +1,63 @@
+# Basic configuration for Kong without the ingress controller, using the Postgres subchart
+# This installation does not create an Ingress or LoadBalancer Service for
+# the Admin API. It requires port-forwards to access without further
+# configuration to add them, e.g.:
+# kubectl port-forward deploy/your-deployment-kong 8001:8001
+
+image:
+  repository: giovanibrioni/kong
+  tag: "2.8.1-arm"
+
+env:
+  prefix: /kong_prefix/
+  database: postgres
+  plugins: bundled, oidc, http-log-multi-body, jwt-keycloak
+  proxy_listen: 0.0.0.0:8000, 0.0.0.0:8443 http2 ssl, 0.0.0.0:9080 http2
+admin:
+  enabled: true
+  http:
+    enabled: true
+    servicePort: 8001
+    containerPort: 8001
+
+
+postgresql:
+  enabled: true
+  auth:
+    username: kong
+    database: kong
+  image:
+    repository: arm64v8/postgres
+    tag: 13
+
+podAnnotations:
+  prometheus.io/scrape: "true" # Ask Prometheus to scrape the
+  prometheus.io/port: "8100"   # Kong pods for metrics
+
+# Specify Kong proxy service configuration
+proxy:
+  # Enable creating a Kubernetes service for the proxy
+  enabled: true
+  type: LoadBalancer
+  annotations: {}
+  labels:
+    enable-metrics: "true"
+
+  http:
+    # Enable plaintext HTTP listen for the proxy
+    enabled: true
+    servicePort: 80
+    containerPort: 8000
+    parameters: []
+
+  tls:
+    # Enable HTTPS listen for the proxy
+    enabled: true
+    servicePort: 443
+    containerPort: 8443
+    parameters:
+    - http2
+
+  stream: []
+ingressController:
+  enabled: false

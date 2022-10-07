@@ -1,4 +1,4 @@
-FROM kong:2.8.1-alpine
+FROM arm64v8/kong:2.8.1-alpine
 
 LABEL description="Alpine + Kong + kong-oidc plugin + http-log-multi-body"
 
