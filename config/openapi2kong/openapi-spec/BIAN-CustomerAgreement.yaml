@@ -1,0 +1,1057 @@
+---
+openapi: 3.0.1
+info:
+  title: Customer Agreement
+  description: This service domain maintains the master customer agreement/legal contract. Note that a customer can be a complex corporate entity with many subsidiaries operating in different geopolitical areas. The customer agreement is linked to as many Sales Product Agreements as needed for all in-force products
+  version: 10.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/BIAN-3/CustomerAgreement/10.0.0
+  description: SwaggerHub API Auto Mocking
+paths:
+  /CustomerAgreement/Evaluate:
+    post:
+      tags:
+      - CR - CustomerAgreement
+      summary: EvCR Establish a customer master agreement (evaluate applicable rules)
+      description: EvCR Establish a customer master agreement (evaluate applicable rules)
+      operationId: Evaluate
+      parameters: []
+      requestBody:
+        $ref: '#/components/requestBodies/EvaluateCustomerAgreementRequest'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluateCustomerAgreementResponse'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "429":
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+  /CustomerAgreement/{customeragreementId}/Retrieve:
+    get:
+      tags:
+      - CR - CustomerAgreement
+      summary: ReCR Retrieve details about a customer master agreement
+      description: ReCR Retrieve details about a customer master agreement
+      operationId: Retrieve
+      parameters:
+      - name: customeragreementId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerAgreement'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "429":
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+  /CustomerAgreement/{customeragreementId}/LegalTerms/Evaluate:
+    post:
+      tags:
+      - BQ - LegalTerms
+      summary: EvBQ Establish the legal terms for a customer master agreement
+      description: EvBQ Establish the legal terms for a customer master agreement
+      operationId: EvaluateLegalTerms
+      parameters:
+      - name: customeragreementId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/EvaluateLegalTermsRequest'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluateLegalTermsResponse'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "429":
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+  /CustomerAgreement/{customeragreementId}/LegalTerms/{legaltermsId}/Update:
+    put:
+      tags:
+      - BQ - LegalTerms
+      summary: UpBQ Update the legal terms for a customer master agreement
+      description: UpBQ Update the legal terms for a customer master agreement
+      operationId: UpdateLegalTerms
+      parameters:
+      - name: customeragreementId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: legaltermsId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/UpdateLegalTermsRequest'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateLegalTermsResponse'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "429":
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+  /CustomerAgreement/{customeragreementId}/LegalTerms/{legaltermsId}/Retrieve:
+    get:
+      tags:
+      - BQ - LegalTerms
+      summary: ReBQ Retrieve details about the legal terms of an agreement
+      description: ReBQ Retrieve details about the legal terms of an agreement
+      operationId: RetrieveLegalTerms
+      parameters:
+      - name: customeragreementId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: legaltermsId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetrieveLegalTermsResponse'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "429":
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+  /CustomerAgreement/{customeragreementId}/RegulatoryTerms/Evaluate:
+    post:
+      tags:
+      - BQ - RegulatoryTerms
+      summary: EvBQ Establish the regulatory terms for a customer master agreement
+      description: EvBQ Establish the regulatory terms for a customer master agreement
+      operationId: EvaluateRegulatoryTerms
+      parameters:
+      - name: customeragreementId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/EvaluateRegulatoryTermsRequest'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluateRegulatoryTermsResponse'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "429":
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+  /CustomerAgreement/{customeragreementId}/RegulatoryTerms/{regulatorytermsId}/Update:
+    put:
+      tags:
+      - BQ - RegulatoryTerms
+      summary: UpBQ Update the regulatory terms for a customer master agreement
+      description: UpBQ Update the regulatory terms for a customer master agreement
+      operationId: UpdateRegulatoryTerms
+      parameters:
+      - name: customeragreementId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: regulatorytermsId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/UpdateRegulatoryTermsRequest'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateRegulatoryTermsResponse'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "429":
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+  /CustomerAgreement/{customeragreementId}/RegulatoryTerms/{regulatorytermsId}/Retrieve:
+    get:
+      tags:
+      - BQ - RegulatoryTerms
+      summary: ReBQ Retrieve details about the regulatory terms of an agreement
+      description: ReBQ Retrieve details about the regulatory terms of an agreement
+      operationId: RetrieveRegulatoryTerms
+      parameters:
+      - name: customeragreementId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: regulatorytermsId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerAgreement'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "429":
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+  /CustomerAgreement/{customeragreementId}/PolicyTerms/Evaluate:
+    post:
+      tags:
+      - BQ - PolicyTerms
+      summary: EvBQ Establish the corporate policy terms for a customer master agreement
+      description: EvBQ Establish the corporate policy terms for a customer master agreement
+      operationId: EvaluatePolicyTerms
+      parameters:
+      - name: customeragreementId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/EvaluatePolicyTermsRequest'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluatePolicyTermsResponse'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "429":
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+  /CustomerAgreement/{customeragreementId}/PolicyTerms/{policytermsId}/Update:
+    put:
+      tags:
+      - BQ - PolicyTerms
+      summary: UpBQ Update the corporate policy terms for a customer master agreement
+      description: UpBQ Update the corporate policy terms for a customer master agreement
+      operationId: UpdatePolicyTerms
+      parameters:
+      - name: customeragreementId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: policytermsId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/UpdatePolicyTermsRequest'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdatePolicyTermsResponse'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "429":
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+  /CustomerAgreement/{customeragreementId}/PolicyTerms/{policytermsId}/Retrieve:
+    get:
+      tags:
+      - BQ - PolicyTerms
+      summary: ReBQ Retrieve details about the corporate policy terms of an agreement
+      description: ReBQ Retrieve details about the corporate policy terms of an agreement
+      operationId: RetrievePolicyTerms
+      parameters:
+      - name: customeragreementId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: policytermsId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerAgreement'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "429":
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+components:
+  schemas:
+    CustomerAgreement:
+      type: object
+      properties:
+        CustomerReference:
+          type: object
+        LegalEntityReference:
+          type: object
+        AgreementType:
+          type: string
+        AgreementJurisdiction:
+          type: string
+        AgreementValidFromOrToDate:
+          type: string
+        AgreementSignatoriesOrResponsibleParties:
+          type: string
+        DocumentDirectoryEntryInstanceReference:
+          type: object
+        SalesProductAgreementReference:
+          type: object
+        PartyLife-cycleManagementReference:
+          type: object
+    RegulatoryTerms:
+      type: object
+      properties:
+        RegulatoryAuthority:
+          type: string
+        ApplicableRegulationReference:
+          type: object
+        ApplicableRegulationInterpretation:
+          type: string
+    PolicyTerms:
+      type: object
+      properties:
+        BankPolicy-RuleType:
+          type: string
+        ApplicableBankPolicy-RuleReference:
+          type: object
+        ApplicableBankPolicy-RuleInterpretation:
+          type: string
+    LegalTerms:
+      type: object
+      properties:
+        Jurisdiction:
+          type: string
+        ApplicableLawReference:
+          type: object
+        ApplicableLawInterpretation:
+          type: string
+    HTTPError:
+      type: object
+      properties:
+        status_code:
+          type: string
+        status:
+          type: string
+        message:
+          type: string
+    EvaluateCustomerAgreementRequest:
+      type: object
+      properties:
+        CustomerAgreement:
+          $ref: '#/components/schemas/EvaluateCustomerAgreementRequest_CustomerAgreement'
+    EvaluateCustomerAgreementResponse:
+      type: object
+      properties:
+        CustomerAgreement:
+          $ref: '#/components/schemas/EvaluateCustomerAgreementResponse_CustomerAgreement'
+    EvaluateLegalTermsRequest:
+      type: object
+      properties:
+        CustomerAgreement:
+          $ref: '#/components/schemas/EvaluateLegalTermsRequest_CustomerAgreement'
+        LegalTerms:
+          $ref: '#/components/schemas/EvaluateLegalTermsRequest_LegalTerms'
+    EvaluateLegalTermsResponse:
+      type: object
+      properties:
+        LegalTerms:
+          $ref: '#/components/schemas/EvaluateLegalTermsResponse_LegalTerms'
+    UpdateLegalTermsRequest:
+      type: object
+      properties:
+        LegalTerms:
+          $ref: '#/components/schemas/UpdateLegalTermsRequest_LegalTerms'
+    UpdateLegalTermsResponse:
+      type: object
+      properties:
+        LegalTerms:
+          $ref: '#/components/schemas/UpdateLegalTermsRequest_LegalTerms'
+    RetrieveLegalTermsResponse:
+      type: object
+      properties:
+        CustomerAgreement:
+          $ref: '#/components/schemas/EvaluateLegalTermsRequest_CustomerAgreement'
+        LegalTerms:
+          $ref: '#/components/schemas/RetrieveLegalTermsResponse_LegalTerms'
+    EvaluateRegulatoryTermsRequest:
+      type: object
+      properties:
+        CustomerAgreement:
+          $ref: '#/components/schemas/EvaluateLegalTermsRequest_CustomerAgreement'
+        RegulatoryTerms:
+          $ref: '#/components/schemas/EvaluateRegulatoryTermsRequest_RegulatoryTerms'
+    EvaluateRegulatoryTermsResponse:
+      type: object
+      properties:
+        RegulatoryTerms:
+          $ref: '#/components/schemas/EvaluateRegulatoryTermsResponse_RegulatoryTerms'
+    UpdateRegulatoryTermsRequest:
+      type: object
+      properties:
+        RegulatoryTerms:
+          $ref: '#/components/schemas/EvaluateRegulatoryTermsRequest_RegulatoryTerms'
+    UpdateRegulatoryTermsResponse:
+      type: object
+      properties:
+        RegulatoryTerms:
+          $ref: '#/components/schemas/EvaluateRegulatoryTermsRequest_RegulatoryTerms'
+    EvaluatePolicyTermsRequest:
+      type: object
+      properties:
+        CustomerAgreement:
+          $ref: '#/components/schemas/EvaluateLegalTermsRequest_CustomerAgreement'
+        PolicyTerms:
+          $ref: '#/components/schemas/EvaluatePolicyTermsRequest_PolicyTerms'
+    EvaluatePolicyTermsResponse:
+      type: object
+      properties:
+        PolicyTerms:
+          $ref: '#/components/schemas/EvaluatePolicyTermsResponse_PolicyTerms'
+    UpdatePolicyTermsRequest:
+      type: object
+      properties:
+        PolicyTerms:
+          $ref: '#/components/schemas/EvaluatePolicyTermsRequest_PolicyTerms'
+    UpdatePolicyTermsResponse:
+      type: object
+      properties:
+        PolicyTerms:
+          $ref: '#/components/schemas/EvaluatePolicyTermsRequest_PolicyTerms'
+    EvaluateCustomerAgreementRequest_CustomerAgreement:
+      type: object
+      properties:
+        CustomerReference:
+          type: object
+        LegalEntityReference:
+          type: object
+        AgreementType:
+          type: string
+        AgreementValidFromOrToDate:
+          type: string
+        AgreementSignatoriesOrResponsibleParties:
+          type: string
+        DocumentDirectoryEntryInstanceReference:
+          type: object
+        SalesProductAgreementReference:
+          type: object
+        PartyLife-cycleManagementReference:
+          type: object
+    EvaluateCustomerAgreementResponse_CustomerAgreement:
+      type: object
+      properties:
+        AgreementJurisdiction:
+          type: string
+        AgreementValidFromOrToDate:
+          type: string
+        AgreementSignatoriesOrResponsibleParties:
+          type: string
+        DocumentDirectoryEntryInstanceReference:
+          type: object
+    EvaluateLegalTermsRequest_CustomerAgreement:
+      type: object
+      properties:
+        CustomerReference:
+          type: object
+        LegalEntityReference:
+          type: object
+        AgreementType:
+          type: string
+        AgreementJurisdiction:
+          type: string
+        AgreementValidFromOrToDate:
+          type: string
+        AgreementSignatoriesOrResponsibleParties:
+          type: string
+        DocumentDirectoryEntryInstanceReference:
+          type: object
+        SalesProductAgreementReference:
+          type: object
+        PartyLife-cycleManagementReference:
+          type: object
+    EvaluateLegalTermsRequest_LegalTerms:
+      type: object
+      properties:
+        ApplicableLawReference:
+          type: object
+    EvaluateLegalTermsResponse_LegalTerms:
+      type: object
+      properties:
+        ApplicableLawInterpretation:
+          type: string
+    UpdateLegalTermsRequest_LegalTerms:
+      type: object
+      properties:
+        Jurisdiction:
+          type: string
+        ApplicableLawReference:
+          type: object
+    RetrieveLegalTermsResponse_LegalTerms:
+      type: object
+      properties:
+        ApplicableLawReference:
+          type: object
+        ApplicableLawInterpretation:
+          type: string
+    EvaluateRegulatoryTermsRequest_RegulatoryTerms:
+      type: object
+      properties:
+        RegulatoryAuthority:
+          type: string
+        ApplicableRegulationReference:
+          type: object
+    EvaluateRegulatoryTermsResponse_RegulatoryTerms:
+      type: object
+      properties:
+        ApplicableRegulationInterpretation:
+          type: string
+    EvaluatePolicyTermsRequest_PolicyTerms:
+      type: object
+      properties:
+        BankPolicy-RuleType:
+          type: string
+        ApplicableBankPolicy-RuleReference:
+          type: object
+    EvaluatePolicyTermsResponse_PolicyTerms:
+      type: object
+      properties:
+        ApplicableBankPolicy-RuleInterpretation:
+          type: string
+  responses:
+    HTTPError:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    BadRequestError:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    UnauthorizedError:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    ForbiddenError:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    NotFoundError:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    TooManyRequestsError:
+      description: Too Many Requests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+  parameters:
+    CustomerAgreementID:
+      name: customeragreementId
+      in: path
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+    RegulatoryTermsID:
+      name: regulatorytermsId
+      in: path
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+    PolicyTermsID:
+      name: policytermsId
+      in: path
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+    LegalTermsID:
+      name: legaltermsId
+      in: path
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+  requestBodies:
+    EvaluateCustomerAgreementRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EvaluateCustomerAgreementRequest'
+      required: true
+    EvaluateLegalTermsRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EvaluateLegalTermsRequest'
+      required: true
+    UpdateLegalTermsRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateLegalTermsRequest'
+      required: true
+    EvaluateRegulatoryTermsRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EvaluateRegulatoryTermsRequest'
+      required: true
+    UpdateRegulatoryTermsRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateRegulatoryTermsRequest'
+      required: true
+    EvaluatePolicyTermsRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EvaluatePolicyTermsRequest'
+      required: true
+    UpdatePolicyTermsRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdatePolicyTermsRequest'
+      required: true
