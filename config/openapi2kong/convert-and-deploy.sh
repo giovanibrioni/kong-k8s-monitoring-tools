@@ -1,7 +1,13 @@
-#convert openapi spec to kong declarative file
-docker run -it --rm -v $(pwd):/var/temp kong/inso:latest --verbose generate config /var/temp/config/openapi2kong/openapi-spec/petstore.yaml -o /var/temp/config/openapi2kong/import-deck/petstore-deck-import.yaml
-docker run -it --rm -v $(pwd):/var/temp kong/inso:latest --verbose generate config /var/temp/config/openapi2kong/openapi-spec/BIAN-loan.yaml -o /var/temp/config/openapi2kong/import-deck/BIAN-loan-deck-import.yaml
+# #convert openapi spec to kong declarative file
+rm -rf config/openapi2kong/import-deck;
 
-#deploy kong declarative file to kong
-docker run -it --rm -v $(pwd):/var/temp kong/deck:latest sync --kong-addr "http://host.docker.internal/admin-api" -s /var/temp/config/openapi2kong/import-deck/petstore-deck-import.yaml --select-tag inso-generated-petstore
-docker run -it --rm -v $(pwd):/var/temp kong/deck:latest sync --kong-addr "http://host.docker.internal/admin-api" -s /var/temp/config/openapi2kong/import-deck/BIAN-loan-deck-import.yaml --select-tag inso-generated-BIAN-loan
+for file in config/openapi2kong/openapi-spec/*.yaml; 
+do docker run -it --rm -v $(pwd):/var/temp kong/inso:latest --verbose generate config /var/temp/"$file" --type declarative -o /var/temp/config/openapi2kong/import-deck/${file##*/}; 
+done;
+
+# #deploy kong declarative file to kong
+for file in config/openapi2kong/import-deck/*; 
+do docker run -it --rm -v $(pwd):/var/temp kong/deck:latest sync --kong-addr http://localhost/admin-api -s /var/temp/config/openapi2kong/import-deck/${file##*/} --select-tag ${file##*/}; 
+done;
+
+rm -rf config/openapi2kong/import-deck;

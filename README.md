@@ -40,43 +40,20 @@ kubectl get nodes
 sh resources/metallb/install-metallb.sh
 ```
 
-## Generate Certificates
-Hybrid mode uses TLS to secure the CP/DP node communication channel, and requires certificates for it. You can generate these either using kong hybrid gen_cert on a local Kong installation or using OpenSSL:
-```bash
-openssl req -new -x509 -nodes -newkey ec:<(openssl ecparam -name secp384r1) \
-  -keyout /tmp/cluster.key -out /tmp/cluster.crt \
-  -days 1095 -subj "/CN=kong_clustering"
-```
-
-## Place these certificates in a Secret
-```bash
-kubectl create namespace kong
-kubectl create secret tls kong-cluster-cert --cert=/tmp/cluster.crt --key=/tmp/cluster.key -n kong
-```
 ## Install kong
 
 ```bash
-# Install kong control plane
-sh config/install-kong-cp.sh
-
-# Install kong data plane
-sh config/install-kong-dp.sh
-```
-## Deploy all Apps
-```bash
-kubectl apply -f apps --recursive
+# Install kong stantalone(admin and proxy on same pod)
+sh config/install-kong-db.sh
 ```
 
-## Expose kong admin API and Apps
+## Expose kong admin API
 ```bash
 # Port forward kong admin
-kubectl port-forward -n kong service/cp-kong-admin 8001:8001
+kubectl port-forward -n kong service/gateway-kong-admin 8001:8001
 
 # Expose admin API
 sh config/expose-admin-api.sh
-
-# Expose Apps
-sh config/expose-apps.sh
 ```
 
 ## Install Monitoring tools
@@ -170,7 +147,7 @@ curl -H "Host:httpbin.local" http://localhost/anything
 ## Generate load
 
 ```bash
-sh load-test.sh
+sh generate-load.sh
 ```
 
 ## Apply rate-limiting plugin to stop load

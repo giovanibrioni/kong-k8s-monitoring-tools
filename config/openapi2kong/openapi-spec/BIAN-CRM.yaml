@@ -1,0 +1,1432 @@
+---
+openapi: 3.0.1
+info:
+  title: Customer Relationship Management
+  description: This service domain develops and executes a customer plan to maintain and build a customer relationship. Activities include ongoing customer contact, tracking internal and external events and activity of interest and relevance, product and service matching and sales, processing ad-hoc queries, trouble shooting and issue resolution including the initial phases of troubled account recovery
+  version: 10.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/BIAN-3/CustomerRelationshipManagement/10.0.0
+  description: SwaggerHub API Auto Mocking
+paths:
+  /CustomerRelationshipManagement/Create:
+    post:
+      tags:
+      - CR - CustomerRelationshipManagementPlan
+      summary: CrCR Create an initial relationship management plan
+      description: CrCR Create an initial relationship management plan
+      operationId: Create
+      parameters: []
+      requestBody:
+        $ref: '#/components/requestBodies/CreateCustomerRelationshipManagementPlanRequest'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateCustomerRelationshipManagementPlanResponse'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "429":
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+  /CustomerRelationshipManagement/{customerrelationshipmanagementId}/Retrieve:
+    get:
+      tags:
+      - CR - CustomerRelationshipManagementPlan
+      summary: ReCR Retrieve details about a relationship plan
+      description: ReCR Retrieve details about a relationship plan
+      operationId: Retrieve
+      parameters:
+      - name: customerrelationshipmanagementId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetrieveCustomerRelationshipManagementPlanResponse'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "429":
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+  /CustomerRelationshipManagement/{customerrelationshipmanagementId}/Development/Create:
+    post:
+      tags:
+      - BQ - Development
+      summary: CrBQ Create customer development capability  (initialize the capability)
+      description: CrBQ Create customer development capability  (initialize the capability)
+      operationId: CreateDevelopment
+      parameters:
+      - name: customerrelationshipmanagementId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/CreateDevelopmentRequest'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateDevelopmentResponse'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "429":
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+  /CustomerRelationshipManagement/{customerrelationshipmanagementId}/Development/{developmentId}/Update:
+    put:
+      tags:
+      - BQ - Development
+      summary: UpBQ Update details about a relationship development task
+      description: UpBQ Update details about a relationship development task
+      operationId: UpdateDevelopment
+      parameters:
+      - name: customerrelationshipmanagementId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: developmentId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/UpdateDevelopmentRequest'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateDevelopmentResponse'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "429":
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+  /CustomerRelationshipManagement/{customerrelationshipmanagementId}/Development/{developmentId}/Request:
+    put:
+      tags:
+      - BQ - Development
+      summary: RqBQ Request a relationship development task
+      description: RqBQ Request a relationship development task
+      operationId: RequestDevelopment
+      parameters:
+      - name: customerrelationshipmanagementId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: developmentId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/RequestDevelopmentRequest'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestDevelopmentResponse'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "429":
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+  /CustomerRelationshipManagement/{customerrelationshipmanagementId}/Development/{developmentId}/Retrieve:
+    get:
+      tags:
+      - BQ - Development
+      summary: ReBQ Retrieve details about relationship development activity
+      description: ReBQ Retrieve details about relationship development activity
+      operationId: RetrieveDevelopment
+      parameters:
+      - name: customerrelationshipmanagementId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: developmentId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetrieveDevelopmentResponse'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "429":
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+  /CustomerRelationshipManagement/{customerrelationshipmanagementId}/Incident/Create:
+    post:
+      tags:
+      - BQ - Incident
+      summary: CrBQ Create customer incident reporting capability (initialize the capability)
+      description: CrBQ Create customer incident reporting capability (initialize the capability)
+      operationId: CreateIncident
+      parameters:
+      - name: customerrelationshipmanagementId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/CreateIncidentRequest'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateIncidentResponse'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "429":
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+  /CustomerRelationshipManagement/{customerrelationshipmanagementId}/Incident/{incidentId}/Update:
+    put:
+      tags:
+      - BQ - Incident
+      summary: UpBQ Update details about a customer incident
+      description: UpBQ Update details about a customer incident
+      operationId: UpdateIncident
+      parameters:
+      - name: customerrelationshipmanagementId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: incidentId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/Incident'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Incident'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "429":
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+  /CustomerRelationshipManagement/{customerrelationshipmanagementId}/Incident/{incidentId}/Capture:
+    put:
+      tags:
+      - BQ - Incident
+      summary: CaBQ Capture details of a new customer incident
+      description: CaBQ Capture details of a new customer incident
+      operationId: CaptureIncident
+      parameters:
+      - name: customerrelationshipmanagementId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: incidentId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/CaptureIncidentRequest'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CaptureIncidentResponse'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "429":
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+  /CustomerRelationshipManagement/{customerrelationshipmanagementId}/Incident/{incidentId}/Retrieve:
+    get:
+      tags:
+      - BQ - Incident
+      summary: ReBQ Retrieve details about a customer incident
+      description: ReBQ Retrieve details about a customer incident
+      operationId: RetrieveIncident
+      parameters:
+      - name: customerrelationshipmanagementId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: incidentId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetrieveIncidentResponse'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "429":
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+  /CustomerRelationshipManagement/{customerrelationshipmanagementId}/Contact/Create:
+    post:
+      tags:
+      - BQ - Contact
+      summary: CrBQ Create contact handling capability (initialize and track)
+      description: CrBQ Create contact handling capability (initialize and track)
+      operationId: CreateContact
+      parameters:
+      - name: customerrelationshipmanagementId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/CreateContactRequest'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateContactResponse'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "429":
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+  /CustomerRelationshipManagement/{customerrelationshipmanagementId}/Contact/{contactId}/Update:
+    put:
+      tags:
+      - BQ - Contact
+      summary: UpCR Update details of a customer contact
+      description: UpCR Update details of a customer contact
+      operationId: UpdateContact
+      parameters:
+      - name: customerrelationshipmanagementId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: contactId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/UpdateContactRequest'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateContactResponse'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "429":
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+  /CustomerRelationshipManagement/{customerrelationshipmanagementId}/Contact/{contactId}/Request:
+    put:
+      tags:
+      - BQ - Contact
+      summary: RqBQ Request a customer contact
+      description: RqBQ Request a customer contact
+      operationId: RequestContact
+      parameters:
+      - name: customerrelationshipmanagementId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: contactId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/RequestContactRequest'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestContactResponse'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "429":
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+  /CustomerRelationshipManagement/{customerrelationshipmanagementId}/Contact/{contactId}/Retrieve:
+    get:
+      tags:
+      - BQ - Contact
+      summary: ReBQ Retrieve details about customer contacts
+      description: ReBQ Retrieve details about customer contacts
+      operationId: RetrieveContact
+      parameters:
+      - name: customerrelationshipmanagementId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: contactId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetrieveContactResponse'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "429":
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+components:
+  schemas:
+    CustomerRelationshipManagementPlan:
+      type: object
+      properties:
+        CustomerReference:
+          type: object
+        EmployeeOrBusinessUnitReference:
+          type: object
+        CustomerRelationshipRatingType:
+          type: string
+        CustomerRelationshipRating:
+          type: string
+        CustomerInsightType:
+          type: string
+        CustomerInsightDescription:
+          type: string
+        CustomerBudget:
+          type: string
+        CustomerProductCoverage:
+          type: string
+        CustomerProductUsage:
+          type: string
+        CustomerProductEligibilityProfile:
+          type: string
+        CustomerSalesPlan:
+          type: string
+        CustomerProfitability:
+          type: string
+    Incident:
+      type: object
+      properties:
+        RelationshipIncidentRecord:
+          type: string
+        Employee/BusinessUnitReference:
+          type: object
+        ProductandServiceActivityReference:
+          type: object
+        CustomerIncidentType:
+          type: string
+        CustomerIncidentDescription:
+          type: string
+        CustomerIncidentResolution:
+          type: string
+    Development:
+      type: object
+      properties:
+        RelationshipDevelopmentTask:
+          type: string
+        CustomerDevelopmentTaskType:
+          type: string
+        CustomerDevelopmentTaskDescription:
+          type: string
+        CustomerRelationshipDevelopmentPlan:
+          type: string
+        Employee/BusinessUnitReference:
+          type: object
+        CustomerDevelopmentWorkProduct:
+          type: string
+        CustomerDevelopmentTaskResult:
+          type: string
+    Contact:
+      type: object
+      properties:
+        CustomerRelationshipContactHistory:
+          type: string
+        CustomerRelationshipContactSchedule:
+          type: string
+        CustomerRelationshipContactRecord:
+          type: string
+        CustomerRelationshipContactDate:
+          type: string
+        EmployeeReference:
+          type: object
+        CustomerRelationshipContactType:
+          type: string
+        CustomerRelationshipContactResult:
+          type: string
+    HTTPError:
+      type: object
+      properties:
+        status_code:
+          type: string
+        status:
+          type: string
+        message:
+          type: string
+    CreateCustomerRelationshipManagementPlanRequest:
+      type: object
+      properties:
+        CustomerRelationshipManagementPlan:
+          $ref: '#/components/schemas/CreateCustomerRelationshipManagementPlanRequest_CustomerRelationshipManagementPlan'
+    CreateCustomerRelationshipManagementPlanResponse:
+      type: object
+      properties:
+        CustomerRelationshipManagementPlan:
+          $ref: '#/components/schemas/CreateCustomerRelationshipManagementPlanResponse_CustomerRelationshipManagementPlan'
+    RetrieveCustomerRelationshipManagementPlanResponse:
+      type: object
+      properties:
+        CustomerRelationshipManagementPlan:
+          $ref: '#/components/schemas/RetrieveCustomerRelationshipManagementPlanResponse_CustomerRelationshipManagementPlan'
+    CreateDevelopmentRequest:
+      type: object
+      properties:
+        CustomerRelationshipManagementPlan:
+          $ref: '#/components/schemas/RetrieveCustomerRelationshipManagementPlanResponse_CustomerRelationshipManagementPlan'
+    CreateDevelopmentResponse:
+      type: object
+      properties:
+        CustomerRelationshipManagementPlan:
+          $ref: '#/components/schemas/CreateDevelopmentResponse_CustomerRelationshipManagementPlan'
+    UpdateDevelopmentRequest:
+      type: object
+      properties:
+        CustomerRelationshipManagementPlan:
+          $ref: '#/components/schemas/RetrieveCustomerRelationshipManagementPlanResponse_CustomerRelationshipManagementPlan'
+        Development:
+          $ref: '#/components/schemas/UpdateDevelopmentRequest_Development'
+    UpdateDevelopmentResponse:
+      type: object
+      properties:
+        CustomerRelationshipManagementPlan:
+          $ref: '#/components/schemas/RetrieveCustomerRelationshipManagementPlanResponse_CustomerRelationshipManagementPlan'
+        Development:
+          $ref: '#/components/schemas/UpdateDevelopmentRequest_Development'
+    RequestDevelopmentRequest:
+      type: object
+      properties:
+        Development:
+          $ref: '#/components/schemas/RequestDevelopmentRequest_Development'
+    RequestDevelopmentResponse:
+      type: object
+      properties:
+        Development:
+          $ref: '#/components/schemas/UpdateDevelopmentRequest_Development'
+    RetrieveDevelopmentResponse:
+      type: object
+      properties:
+        CustomerRelationshipManagementPlan:
+          $ref: '#/components/schemas/RetrieveCustomerRelationshipManagementPlanResponse_CustomerRelationshipManagementPlan'
+        Development:
+          $ref: '#/components/schemas/UpdateDevelopmentRequest_Development'
+    CreateIncidentRequest:
+      type: object
+      properties:
+        CustomerRelationshipManagementPlan:
+          $ref: '#/components/schemas/RetrieveCustomerRelationshipManagementPlanResponse_CustomerRelationshipManagementPlan'
+    CreateIncidentResponse:
+      type: object
+      properties:
+        CustomerRelationshipManagementPlan:
+          $ref: '#/components/schemas/CreateDevelopmentResponse_CustomerRelationshipManagementPlan'
+    CaptureIncidentRequest:
+      type: object
+      properties:
+        Incident:
+          $ref: '#/components/schemas/CaptureIncidentRequest_Incident'
+    CaptureIncidentResponse:
+      type: object
+      properties:
+        Incident:
+          $ref: '#/components/schemas/CaptureIncidentResponse_Incident'
+    RetrieveIncidentResponse:
+      type: object
+      properties:
+        CustomerRelationshipManagementPlan:
+          $ref: '#/components/schemas/RetrieveCustomerRelationshipManagementPlanResponse_CustomerRelationshipManagementPlan'
+        Incident:
+          $ref: '#/components/schemas/RetrieveIncidentResponse_Incident'
+    CreateContactRequest:
+      type: object
+      properties:
+        Contact:
+          $ref: '#/components/schemas/CreateContactRequest_Contact'
+    CreateContactResponse:
+      type: object
+      properties:
+        Contact:
+          $ref: '#/components/schemas/CreateContactRequest_Contact'
+    UpdateContactRequest:
+      type: object
+      properties:
+        Contact:
+          $ref: '#/components/schemas/UpdateContactRequest_Contact'
+    UpdateContactResponse:
+      type: object
+      properties:
+        Contact:
+          $ref: '#/components/schemas/UpdateContactRequest_Contact'
+    RequestContactRequest:
+      type: object
+      properties:
+        Contact:
+          $ref: '#/components/schemas/RequestContactRequest_Contact'
+    RequestContactResponse:
+      type: object
+      properties:
+        Contact:
+          $ref: '#/components/schemas/RequestContactResponse_Contact'
+    RetrieveContactResponse:
+      type: object
+      properties:
+        CustomerRelationshipManagementPlan:
+          $ref: '#/components/schemas/RetrieveCustomerRelationshipManagementPlanResponse_CustomerRelationshipManagementPlan'
+        Contact:
+          $ref: '#/components/schemas/RetrieveContactResponse_Contact'
+    CreateCustomerRelationshipManagementPlanRequest_CustomerRelationshipManagementPlan:
+      type: object
+      properties:
+        CustomerReference:
+          type: object
+        EmployeeOrBusinessUnitReference:
+          type: object
+        CustomerRelationshipRatingType:
+          type: string
+        CustomerInsightType:
+          type: string
+        CustomerInsightDescription:
+          type: string
+        CustomerProductCoverage:
+          type: string
+        CustomerProductUsage:
+          type: string
+        CustomerProductEligibilityProfile:
+          type: string
+        CustomerSalesPlan:
+          type: string
+    CreateCustomerRelationshipManagementPlanResponse_CustomerRelationshipManagementPlan:
+      type: object
+      properties:
+        CustomerInsightDescription:
+          type: string
+        CustomerBudget:
+          type: string
+        CustomerSalesPlan:
+          type: string
+        CustomerProfitability:
+          type: string
+    RetrieveCustomerRelationshipManagementPlanResponse_CustomerRelationshipManagementPlan:
+      type: object
+      properties:
+        CustomerReference:
+          type: object
+        EmployeeOrBusinessUnitReference:
+          type: object
+        CustomerRelationshipRatingType:
+          type: string
+        CustomerInsightType:
+          type: string
+        CustomerInsightDescription:
+          type: string
+        CustomerBudget:
+          type: string
+        CustomerProductCoverage:
+          type: string
+        CustomerProductUsage:
+          type: string
+        CustomerProductEligibilityProfile:
+          type: string
+        CustomerSalesPlan:
+          type: string
+        CustomerProfitability:
+          type: string
+    CreateDevelopmentResponse_CustomerRelationshipManagementPlan:
+      type: object
+      properties:
+        CustomerBudget:
+          type: string
+        CustomerProductCoverage:
+          type: string
+        CustomerProductUsage:
+          type: string
+        CustomerProductEligibilityProfile:
+          type: string
+        CustomerSalesPlan:
+          type: string
+        CustomerProfitability:
+          type: string
+    UpdateDevelopmentRequest_Development:
+      type: object
+      properties:
+        RelationshipDevelopmentTask:
+          type: string
+        CustomerDevelopmentTaskType:
+          type: string
+        CustomerDevelopmentTaskDescription:
+          type: string
+        CustomerRelationshipDevelopmentPlan:
+          type: string
+        CustomerDevelopmentWorkProduct:
+          type: string
+        CustomerDevelopmentTaskResult:
+          type: string
+    RequestDevelopmentRequest_Development:
+      type: object
+      properties:
+        RelationshipDevelopmentTask:
+          type: string
+        CustomerDevelopmentTaskType:
+          type: string
+        CustomerRelationshipDevelopmentPlan:
+          type: string
+        EmployeeOrBusinessUnitReference:
+          type: object
+    CaptureIncidentRequest_Incident:
+      type: object
+      properties:
+        RelationshipIncidentRecord:
+          type: string
+        EmployeeOrBusinessUnitReference:
+          type: object
+        ProductandServiceActivityReference:
+          type: object
+        CustomerIncidentType:
+          type: string
+        CustomerIncidentDescription:
+          type: string
+    CaptureIncidentResponse_Incident:
+      type: object
+      properties:
+        RelationshipIncidentRecord:
+          type: string
+        CustomerIncidentResolution:
+          type: string
+    RetrieveIncidentResponse_Incident:
+      type: object
+      properties:
+        RelationshipIncidentRecord:
+          type: string
+        ProductandServiceActivityReference:
+          type: object
+        CustomerIncidentType:
+          type: string
+        CustomerIncidentDescription:
+          type: string
+        CustomerIncidentResolution:
+          type: string
+    CreateContactRequest_Contact:
+      type: object
+      properties:
+        CustomerRelationshipContactHistory:
+          type: string
+        CustomerRelationshipContactSchedule:
+          type: string
+    UpdateContactRequest_Contact:
+      type: object
+      properties:
+        CustomerRelationshipContactRecord:
+          type: string
+        CustomerRelationshipContactDate:
+          type: string
+        EmployeeReference:
+          type: object
+        CustomerRelationshipContactType:
+          type: string
+        CustomerRelationshipContactResult:
+          type: string
+    RequestContactRequest_Contact:
+      type: object
+      properties:
+        CustomerRelationshipContactRecord:
+          type: string
+        CustomerRelationshipContactDate:
+          type: string
+        EmployeeReference:
+          type: object
+        CustomerRelationshipContactType:
+          type: string
+    RequestContactResponse_Contact:
+      type: object
+      properties:
+        CustomerRelationshipContactRecord:
+          type: string
+        CustomerRelationshipContactDate:
+          type: string
+        CustomerRelationshipContactType:
+          type: string
+        CustomerRelationshipContactResult:
+          type: string
+    RetrieveContactResponse_Contact:
+      type: object
+      properties:
+        CustomerRelationshipContactHistory:
+          type: string
+        CustomerRelationshipContactSchedule:
+          type: string
+        CustomerRelationshipContactRecord:
+          type: string
+        CustomerRelationshipContactDate:
+          type: string
+        EmployeeReference:
+          type: object
+        CustomerRelationshipContactType:
+          type: string
+        CustomerRelationshipContactResult:
+          type: string
+  responses:
+    HTTPError:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    BadRequestError:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    UnauthorizedError:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    ForbiddenError:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    NotFoundError:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    TooManyRequestsError:
+      description: Too Many Requests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+  parameters:
+    CustomerRelationshipManagementID:
+      name: customerrelationshipmanagementId
+      in: path
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+    IncidentID:
+      name: incidentId
+      in: path
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+    DevelopmentID:
+      name: developmentId
+      in: path
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+    ContactID:
+      name: contactId
+      in: path
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+  requestBodies:
+    CreateCustomerRelationshipManagementPlanRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateCustomerRelationshipManagementPlanRequest'
+      required: true
+    CreateDevelopmentRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateDevelopmentRequest'
+      required: true
+    UpdateDevelopmentRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateDevelopmentRequest'
+      required: true
+    RequestDevelopmentRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RequestDevelopmentRequest'
+      required: true
+    CreateIncidentRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateIncidentRequest'
+      required: true
+    Incident:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Incident'
+      required: true
+    CaptureIncidentRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CaptureIncidentRequest'
+      required: true
+    CreateContactRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateContactRequest'
+      required: true
+    UpdateContactRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateContactRequest'
+      required: true
+    RequestContactRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RequestContactRequest'
+      required: true
