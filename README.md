@@ -254,7 +254,7 @@ curl -H "Host:httpbin.local" http://localhost/anything
 ## Generate load
 
 ```bash
-sh load-test.sh
+sh generate-load.sh
 ```
 
 ## Apply rate-limiting plugin to stop load
