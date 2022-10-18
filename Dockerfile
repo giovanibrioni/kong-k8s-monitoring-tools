@@ -1,6 +1,6 @@
 FROM kong:2.8.1-alpine
 
-LABEL description="Alpine + Kong + kong-oidc plugin + http-log-multi-body"
+LABEL description="Alpine + Kong + kong-oidc plugin + http-log-multi-body + kafka"
 
 USER root
 RUN apk update && apk add curl git gcc musl-dev
@@ -9,5 +9,7 @@ RUN luarocks install --pin lua-resty-jwt
 RUN luarocks install kong-oidc
 RUN luarocks install kong-plugin-http-log-multi-body
 RUN luarocks install kong-plugin-jwt-keycloak
+RUN luarocks install kong-kafka-log
+RUN luarocks install kong-plugin-kafka-log
 
 USER kong
