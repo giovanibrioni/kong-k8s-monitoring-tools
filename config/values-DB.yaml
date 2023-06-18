@@ -6,12 +6,12 @@
 
 image:
   repository: giovanibrioni/kong
-  tag: "2.8.1-arm"
+  tag: "2.8.1-arm-path-prefix"
 
 env:
   prefix: /kong_prefix/
   database: postgres
-  plugins: bundled, oidc, http-log-multi-body, jwt-keycloak
+  plugins: bundled, oidc, http-log-multi-body, jwt-keycloak, path-prefix
   proxy_listen: 0.0.0.0:8000, 0.0.0.0:8443 http2 ssl, 0.0.0.0:9080 http2
 admin:
   enabled: true
